@@ -28,13 +28,13 @@ export class PrismaMovieRepository implements IMovieRepository {
     const moviesFromDb = await prisma.movie.findMany();
 
     return moviesFromDb.map(
-      (dbMovie) =>
+      (dbMovie: any) =>
         new Movie({
           id: dbMovie.id,
-          title: dbMovie.title,
-          overview: dbMovie.overview,
+          title: dbMovie.title ?? "",
+          overview: dbMovie.overview ?? "",
           rating: dbMovie.rating,
-          posterPath: dbMovie.posterPath,
+          posterPath: dbMovie.posterPath ?? "",
           releaseDate: dbMovie.releaseDate,
         }),
     );
